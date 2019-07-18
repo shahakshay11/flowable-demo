@@ -1,0 +1,636 @@
+{
+  "id": "8d808e41-a7f1-11e9-aa49-0242ac110002",
+  "name": "Vacation request",
+  "key": "vacationRequest",
+  "description": null,
+  "editorJson": {
+    "bounds": {
+      "lowerRight": {
+        "x": 1485,
+        "y": 700
+      },
+      "upperLeft": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "resourceId": "canvas",
+    "stencil": {
+      "id": "BPMNDiagram"
+    },
+    "stencilset": {
+      "namespace": "http://b3mn.org/stencilset/bpmn2.0#",
+      "url": "../editor/stencilsets/bpmn2.0/bpmn2.0.json"
+    },
+    "properties": {
+      "process_id": "vacationRequest",
+      "name": "Vacation request",
+      "process_namespace": "http://www.flowable.org/processdef",
+      "iseagerexecutionfetch": false,
+      "messages": [],
+      "executionlisteners": {
+        "executionListeners": []
+      },
+      "eventlisteners": {
+        "eventListeners": []
+      },
+      "signaldefinitions": [],
+      "messagedefinitions": []
+    },
+    "childShapes": [
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 30,
+            "y": 208
+          },
+          "upperLeft": {
+            "x": 0,
+            "y": 178
+          }
+        },
+        "resourceId": "request",
+        "childShapes": [],
+        "stencil": {
+          "id": "StartNoneEvent"
+        },
+        "properties": {
+          "overrideid": "request",
+          "initiator": "employeeName",
+          "formkeydefinition": "vacation-request",
+          "interrupting": true,
+          "executionlisteners": {
+            "executionListeners": []
+          }
+        },
+        "outgoing": [
+          {
+            "resourceId": "flow1"
+          }
+        ]
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 172,
+            "y": 212
+          },
+          "upperLeft": {
+            "x": 128,
+            "y": 212
+          }
+        },
+        "resourceId": "flow1",
+        "childShapes": [],
+        "stencil": {
+          "id": "SequenceFlow"
+        },
+        "dockers": [
+          {
+            "x": 15,
+            "y": 15
+          },
+          {
+            "x": 50,
+            "y": 30
+          }
+        ],
+        "outgoing": [
+          {
+            "resourceId": "handleRequest"
+          }
+        ],
+        "target": {
+          "resourceId": "handleRequest"
+        },
+        "properties": {
+          "overrideid": "flow1"
+        }
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 180,
+            "y": 223
+          },
+          "upperLeft": {
+            "x": 80,
+            "y": 163
+          }
+        },
+        "resourceId": "handleRequest",
+        "childShapes": [],
+        "stencil": {
+          "id": "UserTask"
+        },
+        "properties": {
+          "overrideid": "handleRequest",
+          "name": "Handle vacation request",
+          "documentation": "${employeeName} would like to take ${numberOfDays} day(s) of vacation (Motivation: ${vacationMotivation}).",
+          "usertaskassignment": {
+            "assignment": {
+              "type": "static",
+              "assignee": "$INITIATOR"
+            }
+          },
+          "formkeydefinition": "handle-vacation-request",
+          "asynchronousdefinition": false,
+          "exclusivedefinition": true,
+          "isforcompensation": false,
+          "tasklisteners": {
+            "taskListeners": []
+          },
+          "executionlisteners": {
+            "executionListeners": []
+          }
+        },
+        "outgoing": [
+          {
+            "resourceId": "flow2"
+          }
+        ]
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 270,
+            "y": 213
+          },
+          "upperLeft": {
+            "x": 230,
+            "y": 173
+          }
+        },
+        "resourceId": "requestApprovedDecision",
+        "childShapes": [],
+        "stencil": {
+          "id": "ExclusiveGateway"
+        },
+        "properties": {
+          "overrideid": "requestApprovedDecision",
+          "name": "Request approved?",
+          "executionlisteners": {
+            "executionListeners": []
+          }
+        },
+        "outgoing": [
+          {
+            "resourceId": "flow5"
+          },
+          {
+            "resourceId": "flow3"
+          }
+        ]
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 420,
+            "y": 60
+          },
+          "upperLeft": {
+            "x": 320,
+            "y": 0
+          }
+        },
+        "resourceId": "sendApprovalMail",
+        "childShapes": [],
+        "stencil": {
+          "id": "ManualTask"
+        },
+        "properties": {
+          "overrideid": "sendApprovalMail",
+          "name": "Send confirmation e-mail",
+          "asynchronousdefinition": false,
+          "exclusivedefinition": true,
+          "isforcompensation": false,
+          "executionlisteners": {
+            "executionListeners": []
+          }
+        },
+        "outgoing": [
+          {
+            "resourceId": "flow4"
+          }
+        ]
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 172,
+            "y": 212
+          },
+          "upperLeft": {
+            "x": 128,
+            "y": 212
+          }
+        },
+        "resourceId": "flow4",
+        "childShapes": [],
+        "stencil": {
+          "id": "SequenceFlow"
+        },
+        "dockers": [
+          {
+            "x": 50,
+            "y": 30
+          },
+          {
+            "x": 432,
+            "y": 30
+          },
+          {
+            "x": 432,
+            "y": 30
+          },
+          {
+            "x": 14,
+            "y": 14
+          }
+        ],
+        "outgoing": [
+          {
+            "resourceId": "theEnd1"
+          }
+        ],
+        "target": {
+          "resourceId": "theEnd1"
+        },
+        "properties": {
+          "overrideid": "flow4"
+        }
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 503,
+            "y": 43
+          },
+          "upperLeft": {
+            "x": 475,
+            "y": 15
+          }
+        },
+        "resourceId": "theEnd1",
+        "childShapes": [],
+        "stencil": {
+          "id": "EndNoneEvent"
+        },
+        "properties": {
+          "overrideid": "theEnd1",
+          "executionlisteners": {
+            "executionListeners": []
+          }
+        },
+        "outgoing": []
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 430,
+            "y": 195
+          },
+          "upperLeft": {
+            "x": 330,
+            "y": 135
+          }
+        },
+        "resourceId": "adjustVacationRequestTask",
+        "childShapes": [],
+        "stencil": {
+          "id": "UserTask"
+        },
+        "properties": {
+          "overrideid": "adjustVacationRequestTask",
+          "name": "Adjust vacation request",
+          "documentation": "Your manager has disapproved your vacation request for ${numberOfDays} days.\n        Reason: ${managerMotivation}",
+          "usertaskassignment": {
+            "assignment": {
+              "type": "static",
+              "assignee": "$INITIATOR"
+            }
+          },
+          "formkeydefinition": "adjust-vacation-request",
+          "asynchronousdefinition": false,
+          "exclusivedefinition": true,
+          "isforcompensation": false,
+          "tasklisteners": {
+            "taskListeners": []
+          },
+          "executionlisteners": {
+            "executionListeners": []
+          }
+        },
+        "outgoing": [
+          {
+            "resourceId": "flow6"
+          }
+        ]
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 510,
+            "y": 273
+          },
+          "upperLeft": {
+            "x": 470,
+            "y": 233
+          }
+        },
+        "resourceId": "resendRequestDecision",
+        "childShapes": [],
+        "stencil": {
+          "id": "ExclusiveGateway"
+        },
+        "properties": {
+          "overrideid": "resendRequestDecision",
+          "name": "Resend request?",
+          "executionlisteners": {
+            "executionListeners": []
+          }
+        },
+        "outgoing": [
+          {
+            "resourceId": "flow7"
+          },
+          {
+            "resourceId": "flow8"
+          }
+        ]
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 628,
+            "y": 266
+          },
+          "upperLeft": {
+            "x": 600,
+            "y": 238
+          }
+        },
+        "resourceId": "theEnd2",
+        "childShapes": [],
+        "stencil": {
+          "id": "EndNoneEvent"
+        },
+        "properties": {
+          "overrideid": "theEnd2",
+          "executionlisteners": {
+            "executionListeners": []
+          }
+        },
+        "outgoing": []
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 172,
+            "y": 212
+          },
+          "upperLeft": {
+            "x": 128,
+            "y": 212
+          }
+        },
+        "resourceId": "flow2",
+        "childShapes": [],
+        "stencil": {
+          "id": "SequenceFlow"
+        },
+        "dockers": [
+          {
+            "x": 50,
+            "y": 30
+          },
+          {
+            "x": 20,
+            "y": 20
+          }
+        ],
+        "outgoing": [
+          {
+            "resourceId": "requestApprovedDecision"
+          }
+        ],
+        "target": {
+          "resourceId": "requestApprovedDecision"
+        },
+        "properties": {
+          "overrideid": "flow2"
+        }
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 172,
+            "y": 212
+          },
+          "upperLeft": {
+            "x": 128,
+            "y": 212
+          }
+        },
+        "resourceId": "flow5",
+        "childShapes": [],
+        "stencil": {
+          "id": "SequenceFlow"
+        },
+        "dockers": [
+          {
+            "x": 20,
+            "y": 20
+          },
+          {
+            "x": 50,
+            "y": 30
+          }
+        ],
+        "outgoing": [
+          {
+            "resourceId": "adjustVacationRequestTask"
+          }
+        ],
+        "target": {
+          "resourceId": "adjustVacationRequestTask"
+        },
+        "properties": {
+          "overrideid": "flow5",
+          "conditionsequenceflow": "${vacationApproved == 'Reject'}"
+        }
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 172,
+            "y": 212
+          },
+          "upperLeft": {
+            "x": 128,
+            "y": 212
+          }
+        },
+        "resourceId": "flow3",
+        "childShapes": [],
+        "stencil": {
+          "id": "SequenceFlow"
+        },
+        "dockers": [
+          {
+            "x": 20,
+            "y": 20
+          },
+          {
+            "x": 250,
+            "y": 30
+          },
+          {
+            "x": 50,
+            "y": 30
+          }
+        ],
+        "outgoing": [
+          {
+            "resourceId": "sendApprovalMail"
+          }
+        ],
+        "target": {
+          "resourceId": "sendApprovalMail"
+        },
+        "properties": {
+          "overrideid": "flow3",
+          "conditionsequenceflow": "${vacationApproved == 'Approve'}"
+        }
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 172,
+            "y": 212
+          },
+          "upperLeft": {
+            "x": 128,
+            "y": 212
+          }
+        },
+        "resourceId": "flow6",
+        "childShapes": [],
+        "stencil": {
+          "id": "SequenceFlow"
+        },
+        "dockers": [
+          {
+            "x": 50,
+            "y": 30
+          },
+          {
+            "x": 490,
+            "y": 165
+          },
+          {
+            "x": 20,
+            "y": 20
+          }
+        ],
+        "outgoing": [
+          {
+            "resourceId": "resendRequestDecision"
+          }
+        ],
+        "target": {
+          "resourceId": "resendRequestDecision"
+        },
+        "properties": {
+          "overrideid": "flow6"
+        }
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 172,
+            "y": 212
+          },
+          "upperLeft": {
+            "x": 128,
+            "y": 212
+          }
+        },
+        "resourceId": "flow7",
+        "childShapes": [],
+        "stencil": {
+          "id": "SequenceFlow"
+        },
+        "dockers": [
+          {
+            "x": 20,
+            "y": 20
+          },
+          {
+            "x": 491,
+            "y": 323
+          },
+          {
+            "x": 130,
+            "y": 326
+          },
+          {
+            "x": 50,
+            "y": 30
+          }
+        ],
+        "outgoing": [
+          {
+            "resourceId": "handleRequest"
+          }
+        ],
+        "target": {
+          "resourceId": "handleRequest"
+        },
+        "properties": {
+          "overrideid": "flow7",
+          "conditionsequenceflow": "${resendRequest == 'Yes'}"
+        }
+      },
+      {
+        "bounds": {
+          "lowerRight": {
+            "x": 172,
+            "y": 212
+          },
+          "upperLeft": {
+            "x": 128,
+            "y": 212
+          }
+        },
+        "resourceId": "flow8",
+        "childShapes": [],
+        "stencil": {
+          "id": "SequenceFlow"
+        },
+        "dockers": [
+          {
+            "x": 20,
+            "y": 20
+          },
+          {
+            "x": 14,
+            "y": 14
+          }
+        ],
+        "outgoing": [
+          {
+            "resourceId": "theEnd2"
+          }
+        ],
+        "target": {
+          "resourceId": "theEnd2"
+        },
+        "properties": {
+          "overrideid": "flow8",
+          "conditionsequenceflow": "${resendRequest == 'No'}"
+        }
+      }
+    ]
+  }
+}
